@@ -20,3 +20,9 @@ app.get('/',function (req,res) {
 // 爬虫模块
 const spider = require('./spider/spider_command');
 app.use('/spider',spider);
+// 基础模块
+const base = require('./base/base_command');
+app.use('/base',base);
+// 提升模块
+const advance = require('./advanced/advance_command');
+app.use('/advance',advance);

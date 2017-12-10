@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>hello Vue</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="app-1">{{ message }}</div>
+	<!-- 动态绑定 -->
+	<div id="app-2"><span :title = "message"> 将鼠标停在我身上几秒，看到我动态绑定标题！</span></div>
+	<!-- 条件和循环 -->
+	<div id="app-3"><span v-if = "seen">现在你看到我</span></div>
+	<div id="app-4"><ol><li v-for="todo in todos"> {{ todo.text }}</li></ol></div>
+	<!-- 处理用户输入 -->
+	<div id="app-5"><p>{{ message }}</p><button v-on:click="reverseMessage">反向消息</button></div>
+	<!-- 双向绑定 -->
+	<!-- v-model在表单输入和应用程序状态之间进行双向绑定 -->
+	<div id="app-6"><p>{{ message }}</p><input v-model="message"></div>
+	<!-- 与组件组合 -->
+	<div id="app-7">
+		<ol>
+			<todo-item 
+			v-for="item in groceryList" 
+			v-bind:todo="item" 
+			v-bind:key="item.id">
+			</todo-item>
+		</ol>
+	</div>
+</body>
+<script>
+	Vue.component('todo-item',{
+		props: ['todo'],
+		template: '<li>{{ todo.text }}</li>'
+	})
+	new Vue({
+		el:"#app-7",
+		data:{
+			groceryList:[
+				{id:0,text:'Vegetables'},
+				{id:1,text:'Cheese'},
+				{id:2,text:'good good'},
+
+			]
+		}
+	})
+	new Vue({
+		el:"#app-6",
+		data:{
+			message:'Hello Vue'
+		}
+	})
+	new Vue({
+		el:"#app-5",
+		data:{
+			message:"Hello Vue.js!"
+		},
+		methods:{
+			reverseMessage:function () {
+				this.message = this.message.split('').reverse().join('')
+			}
+		}
+	})
+	new Vue({
+		el:"#app-4",
+		data:{
+			todos:[
+				{text: 'Learn Javascript'},
+				{text: 'Learn Vue'},
+				{text: 'Learn Html'}
+			]
+		}
+	})
+	var app3 = new Vue({
+		el:"#app-3",
+		data:{
+			seen:true
+			// seen:false
+		}
+	})
+	new Vue({
+		el:"#app-2",
+		data:{
+			message: '您在' + new Date().toLocaleString()
+		}
+	})
+	new Vue({
+			el:"#app-1",
+			data:{
+				message: 'hello Vue!'
+			}
+	})
+</script>
+</html>

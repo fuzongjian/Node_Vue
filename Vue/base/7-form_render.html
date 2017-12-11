@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>列表渲染</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+	<ul id="app-1">
+		<li v-for="item in items">
+		{{ item.message }}		
+		</li>
+	</ul>
+	<ul id="app-2">
+		<li v-for="(item,index) in items">
+		{{ parentMessage }}-{{ index }}-{{ item.message }}		
+		</li>
+	</ul>
+	<ul id="app-3">
+		<li v-for="value in object">
+			{{ value }}
+		</li>
+	</ul>
+	<ul id="app-4">
+		<li v-for="(value,key) in object">
+			{{ key }} : {{ value }}
+		</li>
+	</ul>
+	<ul id="app-5">
+		<li v-for="(value,key,index) in object">
+			{{ index }}.{{ key }} : {{ value }}
+		</li>
+	</ul>
+	<ul id="app-6">
+		<li v-for="n in evenNumbers">{{ n }}</li>
+	</ul>
+</body>
+	<!-- 用 v-for 把一个数组对应为一组元素 -->
+	<script> 
+		var vue1 = new Vue({
+						el:"#app-1",
+						data:{
+							items:[
+								{message: 'fu'},
+								{message: 'zong'}
+							]
+						}
+					})
+		new Vue({
+			el:"#app-2",
+			data:{
+				parentMessage:'Parent',
+				items:[
+					{message: 'fu'},
+					{message: 'zongjian'}
+				]
+			}
+		})
+	</script>
+	<!-- 一个对象的v-for -->
+	<script>
+		new Vue({
+			el:"#app-3",
+			data:{
+				object:{
+					firstName:'John',
+					lastName:'Doe',
+					age:30
+				}
+			}
+		})
+		new Vue({
+			el:"#app-4",
+			data:{
+				object:{
+					firstName:'John',
+					lastName:'Doe',
+					age:30
+				}
+			}
+		})
+		new Vue({
+			el:"#app-5",
+			data:{
+				object:{
+					firstName:'John',
+					lastName:'Doe',
+					age:30
+				}
+			}
+		})
+	</script>
+	<!-- 显示过滤/排序结果 -->
+	<script>
+		new Vue({
+			el:"#app-6",
+			data:{
+				numbers:[1,2,3,4,5]
+			},
+			computed:{
+				evenNumbers:function () {
+					return this.numbers.filter(function (number) {
+						return number%2 === 0
+					})
+				}
+			}
+		})
+	</script>
+</html>

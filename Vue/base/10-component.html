@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>组件</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="app-1">
+		<my-component></my-component>
+	</div>
+	<div id="app-2">
+		<my-component></my-component>
+	</div>
+	<div id="app-3">
+		<child message='hello world'></child>
+	</div>
+	<div id="app-4">
+		<input v-model ="parentMsg"><br>
+		<childd :my-message="parentMsg"></childd>
+	</div>
+	<div id="app-5">
+		<p>{{ total }}</p>
+		<button-counter v-on:increment="incrementTotal"></button-counter>
+		<button-counter v-on:increment="incrementTotal"></button-counter>
+	</div>
+</body>
+	<!-- 全局注册 -->
+	<!-- 确保在初始化根实例之前注册组件 -->
+	<script>
+		// 创建
+		Vue.component('my-component',{
+			template:'<div>A custom component!</div>'
+		})
+		// 创建根实例
+		new Vue({
+			el:"#app-1"
+		})
+	</script>
+	<!-- 局部注册 -->
+	<script>
+		var child = {
+			template:'<div>A custom child component</div>'
+		}
+		new Vue({
+			el:'#app-2',
+			components:{
+				'my-component':child
+			},
+		})
+	</script>
+	<!-- 使用Prop传递数据 -->
+	<script>
+		Vue.component('child',{
+			props:['message'],
+			template:'<span>{{ message }}</span>'
+		}),
+		new Vue({
+			el:"#app-3"
+		})
+	</script>
+	<script>
+		Vue.component('childd',{
+			props:['myMessage'],
+			template:'<span>{{ myMessage }}</span>'
+		})
+		// 动态绑定
+		new Vue({
+			el:"#app-4",
+			data:{
+				parentMsg:''
+			}
+		})
+	</script>
+	<!-- 自定义事件 -->
+	<script>
+		Vue.component('button-counter',{
+			template:'<button  v-on:click = "increateCounter">{{ counter }}</button>',
+			data:function () {
+				return {
+					counter : 0
+				}
+			},
+			methods:{
+				increateCounter:function () {
+					this.counter += 1
+					this.$emit('increment')
+				}
+			},
+		})
+		new Vue({
+			el:"#app-5",
+			data:{
+				total:0
+			},
+			methods:{
+				incrementTotal:function () {
+					this.total +=1
+				}
+			}
+		})
+	</script>
+</html>

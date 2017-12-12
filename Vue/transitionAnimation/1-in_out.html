@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>进入/离开列表过渡</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<link rel="stylesheet" type="text/css" href="1-in_out.css">
+	<!-- 自定义过渡的类名 -->
+	<link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css">
+	<!-- Velocity.js的例子 -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+	<!-- 列表排序过渡 -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
+<body>
+	<div id="app-1" class="app">
+		<p>单元素组件过渡</p>
+		<button v-on:click="show =! show">Toggle</button>
+		<transition name="fade">
+			<p v-if="show">hello</p>
+		</transition>
+	</div>
+	<div id="app-2" class="app">
+		<p>CSS过渡</p>
+		<button @click="show =! show">Toggle render</button>
+		<transition name="slide-fade">
+			<p v-if="show">hello</p>
+		</transition>
+	</div>
+	<div id="app-3" class="app">
+		<p>CSS动画</p>
+		<button @click="show = !show">Toggle show</button>
+		<transition name="bounce">
+			<p v-if="show">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris facilisis enim libero, at lacinia diam fermentum id. Pellentesque habitant morbi tristique senectus et netus.</p>
+		</transition>
+	</div>
+	<div id="app-4" class="app">
+		<p>自定义过渡的类名</p>
+		<button @click="show = !show">Toggle render</button>
+		<transition
+			name="custom-classes-transition"
+			enter-active-class="animated tada"
+			leave-active-class="animated bounceOutRight"
+		>
+			<p class="ppshow" v-if="show">hello</p>
+		</transition>
+	</div>
+	<div id="app-5" class="app">
+		<p>JavaScript钩子</p>
+		<button @click="show = !show">Toggle</button>
+		<transition
+			v-on:before-enter="beforeEnter"
+			v-on:enter="enter"
+			v-on:leave="leave"
+			v-bind:css="false"
+		>
+			<p v-if="show">Demo</p>
+		</transition>
+	</div>
+	<div class="app" id="app-6">
+		<p>列表的进入/离开过渡</p>
+		<button v-on:click="add">Add</button>
+		<button v-on:click="remove">Remove</button>
+		<transition-group name="list" tag="p">
+			<span  v-for="item in items" v-bind:key="item" class="list-item">
+				{{ item }}
+			</span>
+		</transition>
+	</div>
+	<div class="app" id="app-7">
+		<p>列表排序过渡-1</p>
+		<button @click="shuffle">Shuffle</button>
+		<transition-group name="flip-list" tag="ul">
+			<li v-for="item in items" v-bind:key="item">
+				{{ item }}
+			</li>
+		</transition-group>
+	</div>
+	<div class="app" id="app-8">
+		<p>列表排序过渡-2</p>
+		<button @click="shuffle">Shuffle</button>
+		<button @click="add">Add</button>
+		<button @click="remove">Remove</button>
+		<transition-group name="list-complete" tag="p">
+			<span
+				v-for="item in items"
+				v-bind:key="item"
+				class="list-complete-item"
+			>
+				{{ item }}
+			</span>
+		</transition-group>
+	</div>
+	<div class="app" id="app-9">
+		<p>列表的交错过渡</p>
+		<input v-model="query">
+		<transition-group
+			name="staggered-fade"
+			tag="ul"
+			v-bind:css="false"
+			v-on:before-enter="beforeEnter"
+			v-on:enter="enter"
+			v-on:leave="leave"
+		>
+			<li
+				v-for="(item,index) in computedList"
+				v-bind:key="item.msg"
+				v-bind:data-index="index"
+			>{{ item.msg }}</li>
+		</transition-group>
+	</div>
+</body>
+	<script>
+		new Vue({
+			el:"#app-1",
+			data:{
+				show:true
+			}
+		})
+		new Vue({
+			el:"#app-2",
+			data:{
+				show:true
+			}
+		})
+		new Vue({
+			el:"#app-3",
+			data:{
+				show:true
+			}
+		})
+		new Vue({
+			el:"#app-4",
+			data:{
+				show:true
+			}
+		})
+		new Vue({
+			el:"#app-5",
+			data:{
+				show:false
+			},
+			methods:{
+				beforeEnter:function (el) {
+					el.style.opacity = 0
+				    el.style.transformOrigin = 'left'
+				},
+				enter:function (el,done) {
+					Velocity(el, { opacity: 1, fontSize: '1.4em' }, { duration: 300 })
+				    Velocity(el, { fontSize: '1em' }, { complete: done })
+				},
+				leave:function (el,done) {
+					Velocity(el, { translateX: '15px', rotateZ: '50deg' }, { duration: 600 })
+				    Velocity(el, { rotateZ: '100deg' }, { loop: 2 })
+				    Velocity(el, {
+			       		rotateZ: '45deg',
+			        	translateY: '30px',
+			            translateX: '30px',
+			            opacity: 0
+			      }, { complete: done })
+				}
+			}
+		})
+		new Vue({
+			el:"#app-6",
+			data:{
+				items:[1,2,3,4,5,6,7,8,9],
+				nextNum: 10
+			},
+			methods:{
+				randomIndex:function () {
+					return Math.floor(Math.random()*this.items.length)
+				},
+				add:function () {
+					this.items.splice(this.randomIndex(),0,this.nextNum++)
+				},
+				remove:function () {
+					this.items.splice(this.randomIndex(),1)
+				}
+			}
+		})
+		new Vue({
+			el:"#app-7",
+			data:{
+				items:[1,2,3,4,5,6,7,8,9]
+			},
+			methods:{
+				shuffle:function () {
+					this.items =_.shuffle(this.items)
+				}
+			}
+		})
+		new Vue({
+			el:"#app-8",
+			data:{
+				items:[1,2,3,4,5,6,7,8,9],
+				nextNum:10
+			},
+			methods:{
+				randomIndex:function () {
+					return Math.floor(Math.random()*this.items.length)
+				},
+				add:function () {
+					this.items.splice(this.randomIndex(),0,this.nextNum++)
+				},
+				remove:function () {
+					this.items.splice(this.randomIndex(),1)
+				},
+				shuffle:function () {
+					this.items = _.shuffle(this.items)
+				}	
+			}
+		})
+		new Vue({
+			el:"#app-9",
+			data:{
+				query:'',
+				list:[
+					{msg : 'Bruce Lee'},
+					{msg : 'Jackie Chan'},
+					{msg : 'Chuck Norris'},
+					{msg : 'Jet Li'},
+					{msg : 'Kung Fury'}
+				]
+			},
+			computed:{
+				computedList:function () {
+					var vm = this
+					return this.list.filter(function (item) {
+						return item.msg.toLowerCase().indexOf(vm.query.toLowerCase()) !== -1
+					})
+				}
+			},
+			methods:{
+				beforeEnter:function (el) {
+					el.style.opacity = 0
+					el.style.height = 0
+				},
+				enter:function (el,done) {
+					var delay = el.dataset.index*150
+					console.log('hello ---'+el.dataset)
+					setTimeout(function () {
+						Velocity(
+							el,
+							{opacity: 1,height: '1.6em'},
+							{complete: done}
+							)
+					},delay)
+				},
+				leave:function (el,done) {
+					var delay = el.dataset.index*150
+					setTimeout(function () {
+						Velocity(
+							el,
+							{opacity: 0,height:0},
+							{complete: done}
+							)
+					},delay)
+				}
+			}
+		})
+	</script>
+</html>

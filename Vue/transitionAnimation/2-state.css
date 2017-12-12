@@ -1,0 +1,8 @@
+.app{
+	width: 1000px;
+	height: auto;
+	border-width: 1px;
+	border-style: solid;
+	padding: 10px;
+	margin: 10px auto;
+}

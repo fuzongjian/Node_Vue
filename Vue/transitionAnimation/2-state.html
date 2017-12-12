@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>状态过渡</title>
+	<script src="https://unpkg.com/vue/dist/vue.js"></script>
+	<link rel="stylesheet" type="text/css" href="2-state.css">
+	<script src="https://cdn.jsdelivr.net/npm/tween.js@16.3.4"></script>
+</head>
+<body>
+	<div class="app" id="app-1">
+		<p>状态动画与观察者(Tweenjs)</p>
+		<input type="number" step="20" v-model.number="number">
+		<p>{{ animatedNumber }}</p>
+	</div>
+</body>
+	<script>
+		new Vue({
+			el:"#app-1",
+			data:{
+				number:0,
+				animatedNumber:0
+			},
+			watch:{
+				number:function (newValue,oldValue) {
+					var vm = this
+					function animate() {
+						if (TWEEN.update()) {
+							requestAnimationFrame(animate)
+						}
+					}
+					new TWEEN.Tween({tweeningNumber:oldValue})
+						.easing(TWEEN.Easing.Quadratic.Out)
+						.to({ tweeningNumber: newValue},500)
+						.onUpdate(function () {
+							vm.animatedNumber = this.tweeningNumber.toFixed(0)
+						})
+						.start()
+					animate()
+				}
+			}
+		})
+	</script>
+</html>

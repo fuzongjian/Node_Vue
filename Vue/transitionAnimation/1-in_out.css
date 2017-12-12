@@ -1,0 +1,75 @@
+.app{
+	width: 1000px;
+	height: auto;
+	border-style: solid;
+	border-width: 1px;
+	padding: 10px;
+	margin: 10px auto;
+}
+/*单元素/组件的过渡*/
+.fade-enter-active,.fade-leave-active{
+	transition: opacity .5s
+}
+.fade-enter,.fade-leave-to{
+	opacity: 0
+}
+/*CSS过渡*/
+.slide-fade-enter-active{
+	transition: all .3s ease;
+}
+.slide-fade-leave-active{
+	transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter,.slide-fade-leave-to{
+	transition: translateX(10px);
+	opacity: 0;
+}
+.bounce-enter-active{
+	animation: bounce-in .5s;
+}
+.bounce-leave-active{
+	animation: bounce-in .5s reverse;
+}
+@keyframes bounce-in{
+	0%{
+		transform: scale(0);
+	}
+	50%{
+		transform: scale(1.5);
+	}
+	100%{
+		transform: scale(1);
+	}
+}
+#app-4 p.ppshow{
+	padding-left: 50px;
+}
+.list-item{
+	display: inline-block;
+	margin-right: 10px;
+}
+.list-enter-active,.list-leave-active{
+	transition: all 1s;
+}
+.list-enter,.list-leave-to{
+	opacity: 0;
+	transform: translateY(30px);
+}
+#app-7{
+	height: auto;
+}
+.flip-list-move{
+	transition: transform 1s;
+}
+.list-complete-item{
+	transition: all 1s;
+	display: inline-block;
+	margin-right: 10px;
+}
+.list-complete-enter,.list-complete-leave-to{
+	opacity: 0;
+	transform: translateY(30px);
+}
+.list-complete-leave-active{
+	position: absolute;
+}

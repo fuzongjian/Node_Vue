@@ -1,0 +1,18 @@
+{
+  "name": "shoppingcar",
+  "version": "1.0.0",
+  "description": "vue shoppingcar demo",
+  "main": "index.js",
+  "scripts": {
+    "test": "vue demo"
+  },
+  "keywords": [
+    "vue"
+  ],
+  "author": "fuzongjian",
+  "license": "ISC",
+  "dependencies": {
+    "vue": "^2.5.9",
+    "vue-resource": "^1.3.4"
+  }
+}

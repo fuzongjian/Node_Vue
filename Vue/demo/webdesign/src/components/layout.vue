@@ -19,21 +19,48 @@
 			</div>
 		</div>
 		<!-- container -->
-		<div class="container">container</div>
+		<div class="container">
+	<!-- 		<keep-alive>
+				
+			</keep-alive> -->
+			<router-view></router-view>
+		</div>
 		<!-- footer -->
 		<div class="app-foot">
 			<p>© 2017 www.github.com</p>
 		</div>
+		<my-dialog :is-show="isShowAboutDialog" @on-close="closeDialog('isShowAboutDialog')">
+			<p>本报告在调研数据的基础上，采用定性与定量相结合的方式深入分析了专车市场发展的驱动因素与阻碍因素、专车市场背后的产业格局、专车企业的竞争格局、用户对专车市场的依赖程度、专车对其他交通工具运力的补充效应等，通过这五个章节的研究反映专车市场的发展态势和面临的问题。报告力求客观、深入、准确地反映中国专车市场发展情况，为政府、企事业单位和社会各界提供决策依据。 </p>
+		</my-dialog>
+
+		<my-dialog :is-show="isShowLogDialog" @on-close="closeDialog('isShowLogDialog')">
+			<log-form></log-form>
+		</my-dialog>
+
+		<my-dialog :is-show="isShowRegDialog" @on-close="closeDialog('isShowRegDialog')">
+			<reg-form></reg-form>
+		</my-dialog>
+
+
+
 	</div>
 </template>
 <script>
+import Dialog from './dialog'
+import LogForm from './logForm'
+import RegForm from './regForm'
 export default{
 	components:{
-
+		MyDialog: Dialog,
+		LogForm,
+		RegForm
 	},
 	data(){
 		return{
-			username:''
+			username: '',
+			isShowAboutDialog: false,
+			isShowLogDialog: false,
+			isShowRegDialog: false,
 		}
 	},
 	methods:{
@@ -41,13 +68,16 @@ export default{
 
 		},
 		logClick(){
-
+			this.isShowLogDialog = true
 		},
 		regClick(){
-
+			this.isShowRegDialog = true
 		},
 		aboutClick(){
-
+			this.isShowAboutDialog = true
+		},
+		closeDialog(atrr){
+			this[atrr] = false
 		}
 	}
 }
@@ -146,5 +176,9 @@ body{
 	background: #e3e4e8;
 	clear: both;
 	margin-top: 30px;
+}
+.container{
+	width: 1200px;
+	margin: 0 auto;
 }
 </style>

@@ -7,12 +7,12 @@
 				<div class="head-nav">
 					<ul class="nav-list">
 						<li>{{ username }}</li>
+						<li v-if="username !== ''" class="nav-pile">|</li>
+						<li v-if="username !== ''" @click="quit">退出</li>
+						<li v-if="username === ''" @click="logClick">登录</li>
 						<li class="nav-pile">|</li>
-						<li  @click="quit">退出</li>
-						<li   @click="logClick">登录</li>
-						<li class="nav-pile">|</li>
-						<li  @click="regClick">注册</li>
-			            <li  class="nav-pile">|</li>
+						<li v-if="username === ''" @click="regClick">注册</li>
+			            <li v-if="username === ''" class="nav-pile">|</li>
 			            <li @click="aboutClick">关于</li>
 					</ul>
 				</div>
@@ -34,7 +34,7 @@
 		</my-dialog>
 
 		<my-dialog :is-show="isShowLogDialog" @on-close="closeDialog('isShowLogDialog')">
-			<log-form></log-form>
+			<log-form @has-log="onSuccessLog"></log-form>
 		</my-dialog>
 
 		<my-dialog :is-show="isShowRegDialog" @on-close="closeDialog('isShowRegDialog')">
@@ -65,7 +65,7 @@ export default{
 	},
 	methods:{
 		quit(){
-
+			this.username = ''
 		},
 		logClick(){
 			this.isShowLogDialog = true
@@ -78,6 +78,11 @@ export default{
 		},
 		closeDialog(atrr){
 			this[atrr] = false
+		},
+		onSuccessLog(data){
+			// console.log('login success' + data.username)
+			this.username = data.username
+			this.isShowLogDialog = false
 		}
 	}
 }
@@ -180,5 +185,43 @@ body{
 .container{
 	width: 1200px;
 	margin: 0 auto;
+}
+
+.button{
+	background: #4fc08d;
+	color: #fff;
+	display: inline-block;
+	padding: 10px 20px;
+	cursor: pointer;
+}
+.button:hover{
+	background: #4fc08d;
+}
+.g-form-line{
+	padding: 15px 0;
+}
+.g-form-label{
+	width: 100px;
+	font-size: 16px;
+	display: inline-block;
+}
+.g-form-input{
+	display: inline-block;
+}
+.g-form-input input{
+	height: 30px;
+	width: 200px;
+	line-height: 30px;
+	vertical-align: middle;
+	padding: 0 10px;
+	border:1px solid #ccc;
+}
+.g-form-btn{
+	padding-left: 100px;
+	/*margin-left: 100px;*/
+}
+.g-form-error{
+	color: red;
+	padding-left: 15px;
 }
 </style>

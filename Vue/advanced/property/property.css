@@ -1,0 +1,85 @@
+.app{
+	border-width: 1px;
+	border-style: solid;
+	width: 1000px;
+	height: auto;
+	padding: 10px;
+	margin: 20px auto;
+}
+.app h1{
+	line-height: 12px;
+	font-size: 12px;
+	text-align: center;
+}
+#app-1 ul{
+	display: table;
+	width: 100%;
+	padding: 0;
+}
+#app-1 ul li{
+	display: table-cell;
+	text-align: center;
+	height: 40px;
+	line-height: 40px;
+	/*border:1px solid #ccc;*/
+}
+#app-1 ul li a{
+	display: inline-block;
+	width: 100%;
+	text-decoration: none;
+}
+#app-1 ul li a:hover{
+	/*cursor: pointer;*/
+	background-color: red;
+	color: white;
+}
+#app-2 .absolute{
+	position: absolute;
+	left: 200px;
+	top: 150px;
+	width: 200px;
+	height: 300px;
+	background-color: yellow;
+}
+#app-2 .fixed{
+	position: fixed;
+	bottom: 0px;
+	right: 0;
+	width: 200px;
+	background-color: red;
+}
+#app-2 .relative{
+	position: relative;
+	left: 100px;
+}
+#app-3 span{
+	display: block;
+	box-sizing: border-box;
+	width: 200px;
+	padding: 20px;
+	background-color: red;
+
+}
+#app-4 img{
+	vertical-align: top;
+}
+#app-5 .shadow{
+	display: block;
+	width: 500px;
+	height: auto;
+	background-color: red;
+	padding: 5px;
+	text-align: center;
+	margin: 20px auto;
+	box-shadow: 2px 2px 3px #aaa;
+}
+#app-5 .shadow ul{
+	width: 100%;
+	display: table;
+}
+#app-5 .shadow ul li{
+	display: block;
+	line-height: 40px;
+	height: 40px;
+	text-align: left;
+}

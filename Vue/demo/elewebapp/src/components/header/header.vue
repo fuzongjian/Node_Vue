@@ -129,6 +129,7 @@ export default{
 						line-height 18px
 						font-weight bold 
 				.description
+					background-color red
 					margin-bottom 10px
 					line-height 12px
 					font-size 12px

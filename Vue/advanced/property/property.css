@@ -83,3 +83,37 @@
 	height: 40px;
 	text-align: left;
 }
+#app-6 .flex{
+	/*基本样式*/
+	width: 350px;
+	height: 200px;
+	border:1px solid #555;
+	font: 14px Arial;
+	/*建立弹性框*/
+/*	display: -webkit-flex;
+	-webkit-flex-direction:row;*/
+	display: inline-flex;
+	/*flex-direction: row;*/
+}
+#app-6 .flex .item{
+	/*box-sizing: border-box;*/
+	margin: 0 5px;
+	background-color: red;
+	text-align: center;
+	flex: 1 1 auto;
+	width: 30px;
+	transition: width 0.7s ease-out;
+}
+#app-6 .flex .item:hover{
+	width: 200px;
+}
+/*#app-6 .flex span{
+	display: block;
+	flex: 1;
+	line-height: 40px;
+	height: 40px;
+	text-align: center;
+}
+#app-6 .flex span:hover{
+	background-color: red;
+}*/

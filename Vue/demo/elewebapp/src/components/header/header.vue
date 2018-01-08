@@ -46,7 +46,7 @@
 						<li class="support-item" v-for="(item,index) in seller.supports">
 							<span class="icon" :class="classMap[seller.supports[index].type]"></span>
 							<span class="text">{{ seller.supports[index].description }}</span>
-						</li>	
+						</li>
 					</ul>
 					<div class="title">
 						<div class="line"></div>
@@ -95,7 +95,7 @@ export default{
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 	@import "../../common/stylus/mixin"
-	
+
 	.header
 		position relative
 		overflow hidden
@@ -107,34 +107,34 @@ export default{
 			font-size 0
 			.avatar
 				display inline-block
-				vertical-align top 
+				vertical-align top
 				img
 					border-radius 2px
-			.content 
+			.content
 				display inline-block
 				margin-left 16px
-				.title 
+				.title
 					margin 2px 0 8px 0
-					.brand 
+					.brand
 						display inline-block
-						vertical-align top 
+						vertical-align top
 						width 30px
 						height 18px
 						bg-image('brand')
 						background-size 30px 18px
 						background-repeat no-repeat
-					.name 
+					.name
 						margin-left 6px
 						font-size 16px
 						line-height 18px
-						font-weight bold 
+						font-weight bold
 				.description
-					background-color red
+					/*background-color red*/
 					margin-bottom 10px
 					line-height 12px
 					font-size 12px
 				.support
-					.icon 
+					.icon
 						display: inline-block
 						width: 12px
 						height: 12px
@@ -152,7 +152,7 @@ export default{
 							bg-image('invoice_1')
 						&.special
 							bg-image('special_1')
-					.text 
+					.text
 						vertical-align: top
 						line-height 12px
 						font-size 10px
@@ -160,14 +160,14 @@ export default{
 				position absolute
 				right 12px
 				bottom 14px
-				padding 0 8px 
+				padding 0 8px
 				height 24px
 				line-height 24px
 				border-radius 14px
 				background rgba(0,0,0,0.2)
-				text-align center 
-				.count 
-					vertical-align top 
+				text-align center
+				.count
+					vertical-align top
 					font-size 10px
 				.icon-keyboard_arrow_right
 					margin-left 2px
@@ -184,7 +184,7 @@ export default{
 			background rgba(7,17,27,0.2)
 			.bulletin-title
 				display inline-block
-				vertical-align top 
+				vertical-align top
 				margin-top 8px
 				width 22px
 				height 12px
@@ -192,15 +192,15 @@ export default{
 				background-size 22px 12px
 				background-repeat no-repeat
 			.bulletin-text
-				vertical-align top 
-				margin 0 4px  
+				vertical-align top
+				margin 0 4px
 				font-size 10px
 			.icon-keyboard_arrow_right
 				position absolute
 				font-size 10px
 				right 12px
 				top 8px
-		.background 
+		.background
 			position absolute
 			top 0px
 			left 0px
@@ -219,7 +219,7 @@ export default{
 			// 背影模糊
 			// backdrop-filter blur(10px)
 			background rgba(7,17,27,0.8)
-			transition all  0.5s 
+			transition all  0.5s
 			&.fade-transition
 				opacity 1
 				background rgba(7,17,27,0.8)
@@ -232,7 +232,7 @@ export default{
 				.detail-main
 					margin-top 64px
 					padding-bottom 64px
-					.name 
+					.name
 						line-height 16px
 						text-align center
 						font-size 16px
@@ -241,17 +241,17 @@ export default{
 						margin-top 18px
 						padding 2px 0
 						text-align center
-					.title 
-						display flex 
+					.title
+						display flex
 						width 80%
 						margin 28px auto 24px auto
-						.line 
+						.line
 							flex 1
 							position relative
 							top -6px
 							border-bottom 1px solid rgba(255,255,255,0.2)
-						.text 
-							padding 0 12px 
+						.text
+							padding 0 12px
 							font-weight 700
 							font-size 14px
 					.supports
@@ -263,11 +263,11 @@ export default{
 							font-size 0
 							&:last-child
 								margin-bottom 0
-							.icon 
+							.icon
 								display inline-block
 								width 16px
 								height 16px
-								vertical-align top 
+								vertical-align top
 								margin-right 6px
 								background-size 16px 16px
 								background-repeat no-repeat
@@ -281,14 +281,14 @@ export default{
 									bg-image('invoice_2')
 								&.special
 									bg-image('special_2')
-							.text 
+							.text
 								line-height 16px
 								font-size 12px
 					.bulletin
 						width 80%
 						margin 0 auto
-						.content 
-							padding 0 12px 
+						.content
+							padding 0 12px
 							line-height 24px
 							font-size 12px
 			.detail-close
